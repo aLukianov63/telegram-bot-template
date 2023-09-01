@@ -2,25 +2,43 @@ import asyncio
 
 from loguru import logger
 
-from config import Dispatcher, dispatcher, bot
+from config import DB_CREDITALS, Dispatcher, dispatcher, bot
+from src.database import Database
 from src.handlers import commands
+from src.middlewares.db_middlewares import DatabaseMiddleware
+
+database = Database(*DB_CREDITALS)
 
 
 async def on_startup() -> None:
+    try:
+        await database.create_pool()
+        await database.init()
+
+        logger.info(f"🧰 Successfully created a database pool on the host: {database.host}:{database.port}")
+    except Exception as e:
+        logger.error(f"❌❌❌ Error while initing database: {e}")
+
+    dispatcher.message.middleware.register(DatabaseMiddleware(database))
+
     me = await bot.get_me()
     logger.info(f"🤖 Hello. Starting bot: {me.first_name}")
 
 
 async def on_shutdown(dispatcher: Dispatcher) -> None:
     logger.info("💀 Bot finished")
+
     await dispatcher.storage.close()
+    await database.close()
 
 
 async def main() -> None:
-    logger.add("logs/info.log", level="INFO",
-               format="{time} | {level} | {module}:{function}:{line} | {message}",
-               rotation="10 days"
-               )
+    logger.add(
+        "logs/info.log",
+        level="INFO",
+        format="{time} | {level} | {module}:{function}:{line} | {message}",
+        rotation="10 days"
+    )
 
     dispatcher.include_routers(
         commands.router
