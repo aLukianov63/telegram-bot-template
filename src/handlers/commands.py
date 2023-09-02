@@ -4,6 +4,7 @@ from aiogram.types import Message
 from loguru import logger
 
 from src.database import Database
+from src.keyboards.reply import start_markup
 
 router = Router()
 
@@ -17,4 +18,4 @@ async def start(message: Message, db: Database) -> None:
         await db.new_user(tg_user.id, tg_user.username, tg_user.language_code)
         logger.info(f"😀 New user | {tg_user.id} {tg_user.username} ")
 
-    await message.answer(f"Hello! {tg_user.username}")
+    await message.answer(f"Hello! {tg_user.username}", reply_markup=start_markup())

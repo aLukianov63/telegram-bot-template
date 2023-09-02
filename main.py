@@ -4,7 +4,7 @@ from loguru import logger
 
 from config import DB_CREDITALS, Dispatcher, dispatcher, bot
 from src.database import Database
-from src.handlers import commands
+from src.handlers import commands, messages
 from src.middlewares.db_middlewares import DatabaseMiddleware
 
 database = Database(*DB_CREDITALS)
@@ -41,7 +41,8 @@ async def main() -> None:
     )
 
     dispatcher.include_routers(
-        commands.router
+        commands.router,
+        messages.router
     )
 
     dispatcher.startup.register(on_startup)
