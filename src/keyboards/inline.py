@@ -5,9 +5,9 @@ def payment_markup() -> InlineKeyboardMarkup:
     builder = InlineKeyboardBuilder()
 
     builder.row(
-        InlineKeyboardButton(text="1 mount plan", callback_data="1_mount_pay")
+        InlineKeyboardButton(text="product 1", callback_data="product_1")
     )
     builder.row(
-        InlineKeyboardButton(text="1 year plan", callback_data="1_year_pay")
+        InlineKeyboardButton(text="product 2", callback_data="product_2")
     )
     return builder.as_markup()
