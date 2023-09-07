@@ -1,0 +1,8 @@
+**/.git
+tests
+venv
+LICENSE
+**/.gitignore
+Dockerfile
+README.md
+docker-compose.yaml
