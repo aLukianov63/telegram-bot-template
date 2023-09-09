@@ -23,7 +23,7 @@ class Database:
         self.host = host
         self.port = port
 
-    async def create_pool(self):
+    async def create_pool(self) -> None:
         self.pool = await asyncpg.create_pool(
             database=self.name,
             user=self.user,

@@ -17,7 +17,13 @@ async def on_startup() -> None:
 
         logger.info(f"🧰 Successfully created a database pool on the host: {database.host}:{database.port}")
     except Exception as e:
-        logger.error(f"❌❌❌ Error while initing database: {e}")
+        logger.critical(f"🆘 Error while initing database: {e}")
+
+    dispatcher.include_routers(
+        commands.router,
+        messages.router,
+        payment.router
+    )
 
     dispatcher.message.middleware.register(DatabaseMiddleware(database))
 
@@ -40,12 +46,6 @@ async def main() -> None:
         rotation="10 days"
     )
 
-    dispatcher.include_routers(
-        commands.router,
-        messages.router,
-        payment.router
-    )
-
     dispatcher.startup.register(on_startup)
     dispatcher.shutdown.register(on_shutdown)
 
@@ -55,5 +55,5 @@ async def main() -> None:
 if __name__ == "__main__":
     try:
         asyncio.run(main())
-    except (KeyboardInterrupt, SystemExit):
-        logger.info("Error run bot")
+    except (KeyboardInterrupt, SystemExit) as e:
+        logger.error(f"🆘Error run bot: {e}")

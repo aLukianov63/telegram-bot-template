@@ -3,7 +3,7 @@ version: "3"
 services:
 
   postgres:
-    container_name: postgres-bot
+    container_name: bot-database
     image: postgres:15.4-bullseye
     restart: always
     env_file:
@@ -22,7 +22,7 @@ services:
 
 
   redis:
-    container_name: redis-bot
+    container_name: bot-storage
     image: redis:7.2.0-alpine3.18
     restart: always
     env_file:
@@ -36,7 +36,7 @@ services:
 
 
   bot:
-    container_name: telegram-bot
+    container_name: bot
     build: .
     restart: always
     env_file:
@@ -50,6 +50,4 @@ services:
 
 volumes:
   postgres_data:
-    external: true
   redis_data:
-    external: true

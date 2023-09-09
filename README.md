@@ -1,5 +1,8 @@
 <h1 align="center">Telegram bot template✨</h1>
 
+[![Aiogram](https://img.shields.io/badge/aiogram-3.0.0rc2-green)](https://pypi.org/project/aiogram/)
+[![Python](https://img.shields.io/badge/python-3.11-green)](https://www.python.org/)
+
 A simple telegram bot template written on the aiogram~3.0.0, using PostgreSQL and Redis databases
 
 ## 🐋 Getting start with docker
@@ -8,7 +11,7 @@ A simple telegram bot template written on the aiogram~3.0.0, using PostgreSQL an
 git clone https://github.com/aLukianov63/telegram-bot-template.git
 ```
 
-Configure environment variables in ``.env`` file, see [here](#-configuration)
+Configure environment variables in ``.env`` file, see [here](#configuration)
 
 ```
 docker-compose build
