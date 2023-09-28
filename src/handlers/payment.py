@@ -20,6 +20,7 @@ async def product_1(call: CallbackQuery, bot: Bot) -> None:
         is_flexible=True,
         prices=[
             LabeledPrice(label="product 1", amount=PRODUCT_1_PRICE * 100),
+            LabeledPrice(label="discount", amount=-PRODUCT_1_PRICE * 20),
         ],
         max_tip_amount=100000,
         suggested_tip_amounts=[5 * 100, 10 * 100, 15 * 100, 20 * 100],
@@ -43,6 +44,7 @@ async def product_2(call: CallbackQuery, bot: Bot) -> None:
         is_flexible=True,
         prices=[
             LabeledPrice(label="product 2", amount=PRODUCT_2_PRICE * 100),
+            LabeledPrice(label="discount", amount=-PRODUCT_2_PRICE * 20),
         ],
         max_tip_amount=100000,
         suggested_tip_amounts=[5 * 100, 10 * 100, 15 * 100, 20 * 100],

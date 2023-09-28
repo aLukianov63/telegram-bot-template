@@ -1,5 +1,6 @@
 import asyncio
 
+from aiogram.types.bot_command import BotCommand
 from loguru import logger
 
 from config import DB_CREDITALS, Dispatcher, dispatcher, bot
@@ -45,6 +46,11 @@ async def main() -> None:
         format="{time} | {level} | {module}:{function}:{line} | {message}",
         rotation="10 days"
     )
+
+    bot_commands = [
+        BotCommand(command="/start", description="Start working with the bot"),
+    ]
+    await bot.set_my_commands(bot_commands)
 
     dispatcher.startup.register(on_startup)
     dispatcher.shutdown.register(on_shutdown)
